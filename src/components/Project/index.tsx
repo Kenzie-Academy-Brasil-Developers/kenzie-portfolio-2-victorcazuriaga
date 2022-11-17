@@ -17,8 +17,9 @@ interface ReposType {
   name: string;
   language: string;
   description: string;
-  git_url: string;
+  html_url: string;
   homepage: string;
+  has_pages:boolean;
 }
 
 export const Project = (): JSX.Element => {
@@ -35,6 +36,8 @@ export const Project = (): JSX.Element => {
     };
     fetchData();
   }, []);
+  const urlBasePages = "https://victorcazuriaga.github.io/" 
+
   console.log(repositories)
   return (
     <>
@@ -77,8 +80,8 @@ export const Project = (): JSX.Element => {
             <ProjectLink target="_blank" href={repository.html_url}>
               <FaGithub /> Github Code
             </ProjectLink>
-            {repository.homepage && (
-              <ProjectLink target="_blank" href={repository.homepage}>
+            {repository.has_pages && (
+              <ProjectLink target="_blank" href={`${urlBasePages}${repository.name}`}>
                 <FaShare /> Aplicação
               </ProjectLink>
             )}
